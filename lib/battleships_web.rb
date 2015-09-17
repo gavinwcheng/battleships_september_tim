@@ -10,7 +10,7 @@ class BattleshipsWeb < Sinatra::Base
   end
 
   get '/new_game' do
-    @name = session[:name]
+    @name = params[:name]
     erb :new_game
   end
 

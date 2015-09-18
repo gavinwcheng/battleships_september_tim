@@ -1,11 +1,13 @@
 <div>
   <% if @name %>
-  Hello <%= @name %>!
+  Hello <%= @name %> Welcome back to Battleships!
+  Please click here to return to your game
   <% else %>
   <form action='/new_game' method="post">
-    What's your name?
+  <h1> Player1 - Please enter your name? <h1>
     <input type="text" name="name">
     <input type="submit" value="Start">
+
   </form>
   <% end %>
 </div>

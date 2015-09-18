@@ -21,20 +21,27 @@
       expect(page).to have_content 'Hello Philip - Welcome to Battleships'
     end
 
-
     scenario 'I am presented with a new board' do
       visit '/start_game'
-      expect(page).to have_selector('#board')
+      expect(page).to have_selector '#board'
     end
 
-    xscenario 'I have a list of ships' do
+    scenario 'I can logout to bbc website by clicking Logout button' do
       visit '/start_game'
-      expect(page).to have_content "Your Ships"
+      click_button 'Logout'
+      expect(current_url).to eq 'http://www.bbc.co.uk/'
     end
 
-    xscenario 'I can see a button to Place the Aircraft Carrier' do
+    scenario 'I can enter the coordinates of the Aircraft Carrier' do
       visit '/start_game'
-      expect(page).to have_button "Place Aircraft Carrier"
+      expect(page).to have_field 'coords'
+    end
+
+    xscenario 'Aircraft Carrier is placed at the assigned coordinates' do
+      visit '/start_game'
+      fill_in 'coords', :with => 'A1'
+      visit 'place_ships'
+      expect(current_url).to have_content 'coords=A1'
     end
 
     xscenario 'I can see a button to Place the Battleship' do

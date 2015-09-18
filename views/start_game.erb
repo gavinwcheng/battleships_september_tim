@@ -1,9 +1,11 @@
 <H1> Hello <%= @name  %> - Welcome to Battleships
 </H1>
 <%= @board %>
-<H1> Your Ships: </H1>
-<H2> Aircraft Carrier </H2>
-<H2> Battleship </H2>
-<H2> Destroyer </H2>
-<H2> Submarine </H2>
-<H2> Patrol Boat </H2>
+<div> Aircraft Carrier: </div>
+<form action='/place_ships' method='post'>
+  <input type='text' name='coords'>
+</form>
+
+<form action='/logout' method='post'>
+  <input type='submit' value='Logout'>
+</form>

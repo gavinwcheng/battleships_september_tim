@@ -4,13 +4,13 @@ require_relative '../game_setup.rb'
 class BattleshipsWeb < Sinatra::Base
 
   enable :sessions
+  set :views, proc { File.join(root, '..', 'views') }
 
   get '/' do
     erb :index
   end
 
   get '/new_game' do
-    # @name = session[:name]
     erb :new_game
   end
 
@@ -20,15 +20,29 @@ class BattleshipsWeb < Sinatra::Base
   end
 
   get '/start_game' do
-  # p session
-  board = Board.new(Cell)
-  @board = board.print_board
-  @name = session[:name]
-  erb :start_game
+    board = Board.new(Cell)
+    @board = board.print_board
+    @name = session[:name]
+    erb :start_game
+  end
+
+  post '/place_ships' do
+    session[:coords] = params[:coords]
+    redirect ('/place_ships')
+  end
+
+  get '/place_ships' do
+    @coords = session[:coords]
+    erb :place_ships
+  end
+
+  post '/logout' do
+    session[:name] = nil
+    session.clear
+    redirect 'http://www.bbc.co.uk'
   end
 
   # start the server if ruby file executed directly
   run! if app_file == $0
 
-  set :views, proc { File.join(root, '..', 'views') }
 end

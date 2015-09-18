@@ -22,6 +22,7 @@ class BattleshipsWeb < Sinatra::Base
   get '/start_game' do
     @player1 = Player.new
     name = session[:name]
+    p session
     @player1.name = name
     board = Board.new(Cell)
     @board = board.print_board

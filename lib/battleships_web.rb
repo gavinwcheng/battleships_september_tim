@@ -10,7 +10,7 @@ class BattleshipsWeb < Sinatra::Base
   end
 
   get '/new_game' do
-    @name = session[:name]
+    # @name = session[:name]
     erb :new_game
   end
 
@@ -20,13 +20,11 @@ class BattleshipsWeb < Sinatra::Base
   end
 
   get '/start_game' do
-    @player1 = Player.new
-    name = session[:name]
-    p session
-    @player1.name = name
-    board = Board.new(Cell)
-    @board = board.print_board
-    erb :start_game
+  # p session
+  board = Board.new(Cell)
+  @board = board.print_board
+  @name = session[:name]
+  erb :start_game
   end
 
   # start the server if ruby file executed directly
